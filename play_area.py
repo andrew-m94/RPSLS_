@@ -31,9 +31,17 @@ class PlayArea:
         print('3.) Scissors ✌')
         print('4.) Lizard 🤏')
         print('5.) Spock 🖖')
+
+
         user_input1 = int(input(f'{self.players[0].name} Insert number here: '))
         self.players[0].pick_gesture(user_input1)
-        user_input2 = int(input(f'{self.players[1].name} Insert number here: '))
+
+        if self.players[1].name == "Master Mind":
+            user_input2 = random.randrange(1,5)
+
+        else:   
+            user_input2 = int(input(f'{self.players[1].name} Insert number here: '))
+
         self.players[1].pick_gesture(user_input2)
         self.compare_gesture(self.players[0].current_pick, self.players[1].current_pick)
         
@@ -63,10 +71,16 @@ class PlayArea:
             self.players[0].score += 1        
 
     def display_winner(self):
-        pass
+        if self.players[0].score == 2:
+            print(f'{self.players[0].name} wins!') 
+
+        elif self.players[1].score == 2:
+            print(f'{self.players[1].name} wins!')    
 
     def run_game(self):
         self.welcome_message()
         self.choose_game_mode()
-        self.play_round()
+        while self.players[0].score < 2 or self.players[1].score < 2:
+            self.play_round()
+        self.display_winner()
   
