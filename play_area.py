@@ -22,7 +22,10 @@ class PlayArea:
         self.players.append(player_two)
 
     def welcome_message(self):
-        print('Welcome')
+        print('Welcome to Rock Paper Scissors Lizard Spock!\n')
+        print('The rules are as follows:')
+        print(f'Rock crushes Scissors\nScissors cuts Paper \nPaper covers Rock \nRock crushes Lizard' +
+         '\nLizard poisons Spock \nSpock smashes Scissors \nScissors decapitates Lizard\n')
 
     def play_round(self):
         print('Please input the number of the Gesture you would like.')
@@ -32,22 +35,30 @@ class PlayArea:
         print('4.) Lizard 🤏')
         print('5.) Spock 🖖')
 
+        options_list = ['1','2','3','4','5']
+        user_input1 = 0
+        user_input2 = 0
 
-        user_input1 = int(input(f'{self.players[0].name} Insert number here: '))
-        self.players[0].pick_gesture(user_input1)
+        while user_input1 not in options_list:
+            user_input1 = input(f'{self.players[0].name} Insert number here: ')
+        self.players[0].pick_gesture(int(user_input1))
 
         if self.players[1].name == "Master Mind":
             user_input2 = random.randrange(1,5)
 
         else:   
-            user_input2 = int(input(f'{self.players[1].name} Insert number here: '))
+            while user_input2 not in options_list:
+                user_input2 = input(f'{self.players[1].name} Insert number here: ')
 
-        self.players[1].pick_gesture(user_input2)
+        self.players[1].pick_gesture(int(user_input2))
         self.compare_gesture(self.players[0].current_pick, self.players[1].current_pick)
         
 
     def choose_game_mode(self):
-        user_input = input('Would you like to play Singleplayer or Multiplayer: ').lower()
+        options_list = ['singleplayer','multiplayer']
+        user_input = ''
+        while user_input not in options_list:
+            user_input = input('Would you like to play Singleplayer or Multiplayer: ').lower()
         if user_input == 'singleplayer':
             self.add_player_and_ai()
         elif user_input == 'multiplayer':
@@ -62,20 +73,20 @@ class PlayArea:
 
         winner = compare_gesture[p1_pick][p2_pick] 
         if winner == -1:
-            print(f'{self.players[1].name} has won this round with {self.gesture_list[p2_pick]}!')
+            print(f'{self.players[1].name} has won this round with {self.gesture_list[p2_pick]}!\n')
             self.players[1].score += 1
         elif winner == 0:
-            print(f'Both players chose {self.gesture_list[p2_pick]}! This round is a Tie!')
+            print(f'Both players chose {self.gesture_list[p2_pick]}! This round is a Tie!\n')
         elif winner == 1:
-            print(f'{self.players[0].name} has won this round with {self.gesture_list[p1_pick]}!')
+            print(f'{self.players[0].name} has won this round with {self.gesture_list[p1_pick]}!\n')
             self.players[0].score += 1        
 
     def display_winner(self):
         if self.players[0].score == 2:
-            print(f'{self.players[0].name} wins!') 
+            print(f'🎆 {self.players[0].name} wins! 🎆') 
 
         elif self.players[1].score == 2:
-            print(f'{self.players[1].name} wins!')    
+            print(f'🎆 {self.players[1].name} wins! 🎆')    
 
     def run_game(self):
         self.welcome_message()
