@@ -1,7 +1,7 @@
 class Player:
     def __init__(self):
-        self.name = ''
         self.score = 0
+        self.current_pick = None
 
     def pick_gesture(self, pick):
-        pass
+        self.current_pick = (pick - 1)
