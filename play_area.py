@@ -28,7 +28,16 @@ class PlayArea:
         if user_input == 'singleplayer':
             self.add_player_and_ai()
         elif user_input == 'multiplayer':
-            self.add_players()    
+            self.add_players()   
+
+    def compare_gesture(self, p1_pick, p2_pick):
+        compare_gesture = [[0, -1, 1, 1, -1],
+                           [1, 0, -1, -1, 1],
+                           [-1, 1, 0, 1, -1],
+                           [-1, 1, -1, 0, 1],
+                           [1, -1, 1, -1, 0]]
+
+        winner = compare_gesture[p1_pick][p2_pick] 
 
     def display_winner(self):
         pass
