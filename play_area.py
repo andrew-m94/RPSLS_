@@ -5,7 +5,7 @@ import random
 
 class PlayArea:
     def __init__(self):
-        self.gesture_list = ['Rock', 'Paper', 'Scissors', 'Lizard', 'Spock']
+        self.gesture_list = ['Rock ✊', 'Paper 🤚', 'Scissors ✌', 'Lizard 🤏', 'Spock 🖖']
         self.max_score = 2
         self.players = []
 
@@ -26,14 +26,14 @@ class PlayArea:
 
     def play_round(self):
         print('Please input the number of the Gesture you would like.')
-        print('1.) Rock')
-        print('2.) Paper')
-        print('3.) Scissors')
-        print('4.) Lizard')
-        print('5.) Spock')
+        print('1.) Rock ✊')
+        print('2.) Paper 🤚')
+        print('3.) Scissors ✌')
+        print('4.) Lizard 🤏')
+        print('5.) Spock 🖖')
         user_input1 = int(input(f'{self.players[0].name} Insert number here: '))
         self.players[0].pick_gesture(user_input1)
-        user_input2 = int(input(f'{self.players[1].name} Insert number here'))
+        user_input2 = int(input(f'{self.players[1].name} Insert number here: '))
         self.players[1].pick_gesture(user_input2)
         self.compare_gesture(self.players[0].current_pick, self.players[1].current_pick)
         
@@ -54,12 +54,12 @@ class PlayArea:
 
         winner = compare_gesture[p1_pick][p2_pick] 
         if winner == -1:
-            print(f'{self.players[1].name} has won this round!')
+            print(f'{self.players[1].name} has won this round with {self.gesture_list[p2_pick]}!')
             self.players[1].score += 1
         elif winner == 0:
-            print('This round is a tie!')
+            print(f'Both players chose {self.gesture_list[p2_pick]}! This round is a Tie!')
         elif winner == 1:
-            print(f'{self.players[0].name} has won this round!')
+            print(f'{self.players[0].name} has won this round {self.gesture_list[p2_pick]}!')
             self.players[0].score += 1        
 
     def display_winner(self):
