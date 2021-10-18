@@ -1,13 +1,15 @@
 from player import Player
 from human import Human
 from robot import Robot
+from gestures import Gestures
 import random
 
 class PlayArea:
     def __init__(self):
-        self.gesture_list = ['Rock ✊', 'Paper 🤚', 'Scissors ✌', 'Lizard 🤏', 'Spock 🖖']
+        self.gesture_list = []
         self.max_score = 2
         self.players = []
+        self.add_gestures()
 
     def add_players(self):
         player_one = Human()
@@ -20,6 +22,22 @@ class PlayArea:
         player_two = Robot()
         self.players.append(player_one)
         self.players.append(player_two)
+
+    def add_gestures(self):
+        rock = Gestures('Rock')
+        self.gesture_list.append(rock)
+
+        paper = Gestures('Paper')
+        self.gesture_list.append(paper)
+
+        scissors = Gestures('Scissors')
+        self.gesture_list.append(scissors)
+
+        lizard = Gestures('Lizard')
+        self.gesture_list.append(lizard)
+
+        spock = Gestures('Spock')
+        self.gesture_list.append(spock)
 
     def welcome_message(self):
         print('Welcome to Rock Paper Scissors Lizard Spock!\n')
@@ -73,12 +91,12 @@ class PlayArea:
 
         winner = compare_gesture[p1_pick][p2_pick] 
         if winner == -1:
-            print(f'{self.players[1].name} has won this round with {self.gesture_list[p2_pick]}!\n')
+            print(f'{self.players[1].name} has won this round with {self.gesture_list[p2_pick].name}!\n')
             self.players[1].score += 1
         elif winner == 0:
-            print(f'Both players chose {self.gesture_list[p2_pick]}! This round is a Tie!\n')
+            print(f'Both players chose {self.gesture_list[p2_pick].name}! This round is a Tie!\n')
         elif winner == 1:
-            print(f'{self.players[0].name} has won this round with {self.gesture_list[p1_pick]}!\n')
+            print(f'{self.players[0].name} has won this round with {self.gesture_list[p1_pick].name}!\n')
             self.players[0].score += 1        
 
     def display_winner(self):
